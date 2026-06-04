@@ -1,0 +1,30 @@
+{
+  "seed": 42,
+  "n_per_dataset": 200,
+  "datasets": {
+    "ssv2": {
+      "n_picked": 200,
+      "n_classes": 174,
+      "n_classes_used": 174,
+      "max_per_class": 2,
+      "source_csv": "data/csvs/ssv2/test.csv",
+      "class_key": "label"
+    },
+    "k400": {
+      "n_picked": 200,
+      "n_classes": 400,
+      "n_classes_used": 200,
+      "max_per_class": 1,
+      "source_csv": "data/csvs/k400/test.csv",
+      "class_key": "label"
+    },
+    "diving48": {
+      "n_picked": 200,
+      "n_classes": 47,
+      "n_classes_used": 47,
+      "max_per_class": 5,
+      "source_csv": "data/csvs/diving48/val.csv",
+      "class_key": "label"
+    }
+  }
+}

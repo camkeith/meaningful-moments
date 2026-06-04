@@ -1,0 +1,149 @@
+{
+ "_doc": "Enumeration of thesis-cited recognizer-eval artifacts for the eval-sidecar supplement (2026-06-03 release preparation). Every stats script input must resolve within these dirs (+ the v1.0 label release). 'provisional' dirs are best-evidence candidates whose citation is confirmed/refuted by the release closure check; nothing is uploaded while provisional.",
+ "_generated": "2026-06-03, release preparation",
+ "runs": [
+  {
+   "path": "pseudo_labels/classifier_eval/ssv2_vjepa2-ssv2_20260505_025747",
+   "cited_by": "seven-condition SSv2 (HF-port); shuffle-damage base arms; eval_paired_stats",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/k400_videomae-k400-large_20260505_025747",
+   "cited_by": "recompute_exp5_cis RUNS['k400']; K400 alpha-sweep + threshold/budget sidecars; shuffle base",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/diving48_vjepa2-official_20260506_194702",
+   "cited_by": "recompute_exp5_cis RUNS['diving48']; D48 alpha-sweep + threshold/budget; shuffle base",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/ssv2_vjepa2-official_2x3_step2_20260514_110738",
+   "cited_by": "SSv2 primary protocol frame_step=2 alpha-sweep (Results 5.2.3)",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/ssv2_vjepa2-official_2x3_20260514_102205",
+   "cited_by": "SSv2 step=4 sanity-check arm (Results 5.2.3)",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/diving48_vjepa2-official_4x3_20260514_004008",
+   "cited_by": "D48 paper-checkpoint 4x3 table, appendix line ~670 (full 87.82/99.09, n=1970)",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/ssv2_vjepa2-ssv2_id_20260520_210920",
+   "cited_by": "I/D curves SSv2 n=500 (Results 5.4.1, Tables id-auc/id-delta)",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/k400_videomae-k400-large_id_20260520_210920",
+   "cited_by": "I/D curves K400 n=500",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/diving48_vjepa2-diving48_id_20260520_223500",
+   "cited_by": "I/D curves D48 (HF-port recognizer per Table 5.4.1 caption)",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/shuffle_damage_analysis_20260505_025747",
+   "cited_by": "shuffle-damage analysis outputs SSv2+K400 (Results 5.4.2)",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/shuffle_damage_analysis_d48_20260506_142723",
+   "cited_by": "shuffle-damage D48 (sign reversal result)",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/temporal_coverage_analysis",
+   "cited_by": "temporal coverage/clustering diagnostics (appendix)",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/ssv2_vjepa2-ssv2_finetuned_20260512_224610",
+   "cited_by": "selection-aware finetuning SSv2 finetuned arm",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/diving48_vjepa2-diving48_baseline_20260512_224610",
+   "cited_by": "finetuning D48 off-the-shelf arm",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/classifier_eval/diving48_vjepa2-diving48_finetuned_20260512_224610",
+   "cited_by": "finetuning D48 finetuned arm",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/cross_oracle_eval/by_oracle",
+   "cited_by": "cross-oracle recognition stage-1 sidecars, 12 cells (appendix cross-oracle-recognition)",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/f16_pilot_snapshot",
+   "cited_by": "F16 mode-vs-prompt pilot (A.5), snapshot-copied from /scratch2/Cameron/sage_f16 on 2026-06-03",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/mss/qwen3-vl-32b_20260203_161421",
+   "cited_by": "greedy arm A (Feb 03) \u2014 A.2/A.3 tables via mode_prompt_agreement.py",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/mss/qwen3-vl-32b_20260210_145039",
+   "cited_by": "greedy arm B (Feb 10) \u2014 A.2/A.3",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/mss/qwen3-vl-32b_20260211_231732",
+   "cited_by": "greedy arm C (Feb 11) \u2014 A.2/A.3",
+   "provisional": false
+  },
+  {
+   "path": "pseudo_labels/mss/qwen3-vl-32b_20260212_115325",
+   "cited_by": "greedy arm D (Feb 12) \u2014 A.2/A.3",
+   "provisional": false
+  },
+  {
+   "path": "models/finetuned_heads/vjepa2-ssv2_qwen3-vl-32b_ssv2_train_20260427_094557_20260512_172038_100ep",
+   "cited_by": "finetune val_metrics.json SSv2 (metrics only, not the cache shards)",
+   "provisional": false,
+   "metrics_only": true
+  },
+  {
+   "path": "models/finetuned_heads/vjepa2-diving48_qwen3-vl-32b_diving48_train_20260506_003855_20260512_172523",
+   "cited_by": "finetune val_metrics.json D48",
+   "provisional": false,
+   "metrics_only": true
+  }
+ ],
+ "excluded": [
+  {
+   "pattern": "classifier_eval/*smoke*, fastforward_smoke_*, pretend_*",
+   "reason": "smoke/debug runs, no thesis citation"
+  },
+  {
+   "pattern": "*_mask_*20260505_114724",
+   "reason": "mask-operator diagnostic, not in thesis results (confirmed uncited at release closure)"
+  },
+  {
+   "pattern": "*_025536, *_025722",
+   "reason": "same-day earlier attempts superseded by _025747 canonical"
+  },
+  {
+   "pattern": "diving48_vjepa2-diving48_20260506_{013210,020318}",
+   "reason": "pre-official D48 HF-port runs (confirmed at release closure: the I/D analyzer reads its endpoints from the id run dirs)"
+  },
+  {
+   "pattern": "ssv2_vjepa2-official_attentive-warmstart_{20260514_142201,20260515_102900}, diving48_vjepa2-official_attentive-warmstart_{20260514_142201,20260514_235513}",
+   "reason": "no thesis citation \u2014 the adaptation appendix (line ~568) reports the frozen-pooler train_head path, not warmstart"
+  },
+  {
+   "pattern": "ssv2_vjepa2-official_20260506_210519",
+   "reason": "no thesis citation \u2014 superseded by the May 14 2x3/step-protocol runs (appendix line ~711)"
+  }
+ ]
+}

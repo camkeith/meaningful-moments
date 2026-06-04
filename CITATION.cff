@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code or the Meaningful Moments dataset, please cite:"
+title: "Meaningful Moments: VLM-Derived Per-Segment Importance Labels for Video Action Recognition"
+authors:
+  - family-names: Keith
+    given-names: Cameron
+version: v1.0
+date-released: "2026-06-03"
+repository-code: "https://github.com/camkeith/meaningful-moments"
+license: MIT
+identifiers:
+  - type: url
+    value: "https://huggingface.co/datasets/ckeith/meaningful-moments"
+    description: "Meaningful Moments dataset (CC-BY-4.0)"
+preferred-citation:
+  type: thesis
+  title: "VLM-Guided Fast-Forward Sampling"
+  authors:
+    - family-names: Keith
+      given-names: Cameron
+  year: 2026
+  institution:
+    name: "Dartmouth College"

@@ -1,0 +1,139 @@
+# MSS Extraction Default Configuration
+# =====================================
+# Priority: CLI args > --config file > this file
+#
+# To override a setting, either:
+#   1. Edit this file
+#   2. Pass --config your_config.yaml
+#   3. Use CLI args (e.g., --r-runs 20)
+
+# Model Settings
+# --------------
+model: "qwen3-vl-32b"
+  # qwen2.5-vl-7b, qwen2.5-vl-32b, qwen3-vl-30b, qwen3-vl-32b
+
+num_gpus: 4
+  # Range: 1-8 (depends on available GPUs)
+
+visible_gpus: "4,5,6,7"
+  # Format: "0,1,2,3" or null for all available
+  # Sets CUDA_VISIBLE_DEVICES environment variable
+
+cache_dir: "./models/pretrained_oracle_models/hf_cache"
+  # HuggingFace model cache directory
+
+
+# MSS Algorithm Settings
+# ----------------------
+mss_config:
+  delta_t: 0.5
+    # Segment length in seconds
+    # Range: 0.25 - 2.0 (smaller = finer granularity, more segments)
+
+  r_runs: 1
+    # Number of MSS extraction runs for frequency estimation
+    # For "score" strategy: 1 is sufficient (deterministic)
+    # For "random" strategy: 5-50 (more runs = more stable frequencies)
+
+  removal_strategy: "score"
+    # Strategy for selecting which segment to remove:
+    # - "score": Remove segment with smallest confidence drop (deterministic)
+    #            Uses logit-based confidence scores for precise comparison
+    # - "random": Legacy behavior with random tie-breaking (use r_runs > 1)
+
+  direct_scoring: false
+    # Use oracle's single-query importance scores instead of greedy removal loop.
+    # When true, the oracle's precheck response is parsed for per-segment
+    # importance scores (0-100) and minimum_sufficient_set, skipping the
+    # iterative removal loop entirely (~1 oracle call per video instead of ~60).
+    # Binary labels come from the model's minimum_sufficient_set (segments >= 50).
+    # Continuous importance weights (0.0-1.0) are stored in the weight field.
+    # Requires a prompt template that outputs segment importance scores (e.g., SSv2 v4).
+
+  use_thresholds: false
+    # Whether to apply confidence thresholds for removability
+    # - false (default): Only P(YES) > 0.5 matters. Simpler, no calibration needed.
+    # - true: Also check tau_final, delta, and tau_min thresholds
+
+  tau_final: 0.88
+    # Minimum removal confidence for a segment to be removable
+    # Only used when use_thresholds=true
+    # Based on P(YES) = softmax(logit_yes, logit_no, logit_insufficient)
+    # Range: 0.80 - 0.95
+
+  delta: 0.20
+    # Maximum allowed confidence drop for a segment to be removable
+    # Only used when use_thresholds=true
+    # Segment is removable if: drop = (baseline - removal_score) < delta
+    # Range: 0.05 - 0.25
+
+  tau_min: 0.80
+    # Minimum baseline confidence to continue extraction
+    # Only used when use_thresholds=true
+    # If baseline drops below tau_min, extraction terminates
+    # Range: 0.70 - 0.85
+
+  shortlist_fraction: 0.30
+    # Fraction of remaining segments to sample for shortlist
+    # Only used with "random" strategy
+    # Range: 0.1 - 1.0
+
+  shortlist_min: 5
+    # Minimum shortlist size
+    # Only used with "random" strategy
+    # Range: 1 - 20
+
+  shortlist_max: 10
+    # Maximum shortlist size
+    # Only used with "random" strategy
+    # Range: 5 - 50
+
+  tie_breaker: "random"
+    # How to choose among multiple removable segments
+    # Only used with "random" strategy
+    # Options: "random", "vote"
+
+  seed: null
+    # Random seed for reproducibility (null = random)
+    # Range: any integer or null
+
+  show_progress: true
+    # Show tqdm progress bars
+    # true, false
+
+
+# Oracle (VLM) Settings
+# ---------------------
+# Uses single logit-based query with P(YES) > 0.5 threshold for all decisions.
+# P(YES) = softmax(logit_yes, logit_no, logit_insufficient) using 3-way softmax.
+# This means SKIP votes against YES, so segments are only removable
+# if the model is more confident in YES than NO and SKIP combined.
+oracle_config:
+  prompt_template_id: "mss_verification"
+    # Prompt template to use (from mss/prompts/*.md)
+
+  max_evidence_words: 30
+    # Max words in oracle evidence field
+    # Range: 10 - 100
+
+
+# Masking Settings
+# ----------------
+mask_config:
+  operator: "cut"
+    # How to mask removed segments
+    # Options:
+    #   - "cut": Remove segments entirely and concatenate remaining (recommended)
+    #            The model is informed that segments have been removed.
+    #   - "blur": Gaussian blur (preserves motion cues, same video length)
+    #   - "black": Replace with black frames
+    #   - "freeze": Freeze on last visible frame
+    #   - "mean": Replace with mean RGB value
+
+
+# Labeling
+# --------
+# Binary labeling based on MSS membership:
+# - Important: Segment was kept in MSS (necessary for classification)
+# - Unimportant: Segment was removed from MSS (not necessary)
+# No configurable thresholds - labels are determined purely by MSS outcome.

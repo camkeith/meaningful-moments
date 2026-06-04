@@ -1,0 +1,11 @@
+# Optional extras: alternative API oracles (cross-oracle study) + croissant validation
+# Install after the core requirements: pip install -r oracle/requirements-optional.txt
+
+# Optional: Dartmouth API provider
+langchain-dartmouth>=0.3.0  # ChatDartmouth LLM wrapper
+langchain-core>=0.3.0       # LangChain message types
+python-dotenv>=1.0.0        # .env file loading
+# Optional: Gemini API provider
+google-genai>=0.3.0         # Google Gen AI SDK (Gemini)
+# Croissant validation (release verification only)
+mlcroissant>=1.0.0          # croissant.json validation (optional)
